@@ -9,6 +9,8 @@ export default function useBoard() {
   const initPlayer = useStore((state) => state.initPlayer);
   const resetClicks = useStore((state) => state.resetClicks);
   const togglePlayer = useStore((state) => state.togglePlayer);
+  const setCheck = useStore((state) => state.setCheck);
+  const setCheckMate = useStore((state) => state.setCheckMate);
   const fromRef = useRef(null);
 
   const board = useMemo(() => {
@@ -31,6 +33,9 @@ export default function useBoard() {
     // togglePlayer();
     resetClicks();
     // board.aiMove();
-  }, [board, to, resetClicks, togglePlayer]);
+    const [check, checkMate] = board.isChecked();
+    setCheck(check);
+    setCheckMate(checkMate);
+  }, [board, to, resetClicks, togglePlayer, setCheck, setCheckMate]);
   return boardPositions;
 }

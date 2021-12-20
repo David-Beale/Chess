@@ -1,9 +1,7 @@
-import { useSize } from "../../../hooks/useSize";
 import Cell from "./Cell/Cell";
 import { RowContainer } from "./RowStyle";
 
-export function Row({ row }) {
-  const size = useSize();
+export function Row({ row, size }) {
   return (
     <RowContainer size={size}>
       {row.map((cell, index) => (

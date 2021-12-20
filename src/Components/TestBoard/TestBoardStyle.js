@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const BoardContainer = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: ${({ size }) => size}px;
+  height: ${({ size }) => size}px;
   display: flex;
   align-items: center;
   justify-content: center;

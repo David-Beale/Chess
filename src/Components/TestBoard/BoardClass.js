@@ -37,9 +37,9 @@ export default class Board {
   }
 
   updatePieces() {
-    const pieces = this.game.board.configuration.pieces;
-    const moves = this.game.moves();
-
+    const { pieces, moves, check, checkMate } = this.game.exportJson();
+    this.check = check;
+    this.checkMate = checkMate;
     this.matrix.forEach((row) => {
       row.forEach((cell) => {
         cell.piece = pieces[cell.location] ? pieces[cell.location] : null;
@@ -57,16 +57,11 @@ export default class Board {
     });
   }
   isChecked() {
-    return this.game.board.configuration.check;
-  }
-  isCheckMated() {
-    return this.game.board.configuration.checkMate;
+    return [this.check, this.checkMate];
   }
   move(from, to) {
     this.game.move(from, to);
     this.updatePieces(from, to);
-    console.log("checked", this.isChecked());
-    console.log("checkMated", this.isCheckMated());
   }
   aiMove() {
     const playedMove = this.game.aiMove();
