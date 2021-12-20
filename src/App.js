@@ -1,4 +1,4 @@
-import TestBoard from "./TestBoard/TestBoard";
+import TestBoard from "./Components/TestBoard/TestBoard";
 
 export default function App() {
   return <TestBoard />;
