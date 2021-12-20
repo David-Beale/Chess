@@ -27,8 +27,9 @@ export const PieceBackground = styled.div`
   border-radius: 50%;
   border: 1px solid ${({ color }) => (color === "white" ? "black" : "white")};
   background-color: ${({ color }) => color};
-  left: 25%;
-  top: 25%;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
   z-index: 1;
 `;
 export const Text = styled.div`

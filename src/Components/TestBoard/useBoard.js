@@ -30,7 +30,7 @@ export default function useBoard() {
     setBoardPositions(board.getBoardPositions());
     // togglePlayer();
     resetClicks();
-    board.aiMove();
+    // board.aiMove();
   }, [board, to, resetClicks, togglePlayer]);
   return boardPositions;
 }

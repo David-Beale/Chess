@@ -2,7 +2,7 @@ import { useStore } from "../../../../Store/store";
 import { PieceBackground, StyledCell, Text } from "./CellStyle";
 
 const getSelectable = (currentPlayer, myColor, cell, from, moves) => {
-  if (currentPlayer !== myColor) return false;
+  // if (currentPlayer !== myColor) return false;
   if (!from) return !!cell.moves;
   return moves[cell.location];
 };

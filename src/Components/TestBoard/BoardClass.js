@@ -19,7 +19,7 @@ export default class Board {
           piece: null,
           pieceColor: null,
           moves: null,
-          boardColor: color ? "white" : "black",
+          boardColor: color ? "lightgrey" : "darkgrey",
           location,
         };
         newRow.push(cell);
@@ -56,9 +56,17 @@ export default class Board {
       });
     });
   }
+  isChecked() {
+    return this.game.board.configuration.check;
+  }
+  isCheckMated() {
+    return this.game.board.configuration.checkMate;
+  }
   move(from, to) {
     this.game.move(from, to);
     this.updatePieces(from, to);
+    console.log("checked", this.isChecked());
+    console.log("checkMated", this.isCheckMated());
   }
   aiMove() {
     const playedMove = this.game.aiMove();
