@@ -4,8 +4,10 @@ import Check from "./Components/Check/Check";
 import CurrentPlayer from "./Components/CurrentPlayer/CurrentPlayer";
 import TestBoard from "./Components/TestBoard/TestBoard";
 import Three from "./Components/Three/Three";
+import useBoard from "./hooks/useBoard";
 
 export default function App() {
+  useBoard();
   return (
     <>
       <AppContainer>

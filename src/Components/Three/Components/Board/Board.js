@@ -1,31 +1,20 @@
-import React from "react";
-import { useGLTF } from "@react-three/drei";
-import board from "../../../../Assets/board.glb";
-
-export default function Board(props) {
-  const { nodes, materials } = useGLTF(board);
+export default function Board({ board, boardRef }) {
   return (
-    <group {...props} dispose={null}>
-      <group rotation={[-Math.PI / 2, 0, 0]}>
-        <group rotation={[Math.PI / 2, 0, 0]}>
-          <group rotation={[-Math.PI / 2, 0, 0]} scale={[100, 100, 100]}>
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Chess_Board_WoodDark_0.geometry}
-              material={materials.WoodDark}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Chess_Board_Wood_0.geometry}
-              material={materials.Wood}
-            />
-          </group>
-        </group>
-      </group>
+    <group
+      ref={boardRef}
+      rotation={[-Math.PI / 2, 0, -Math.PI / 2]}
+      scale={[100, 100, 100]}
+    >
+      <mesh
+        receiveShadow
+        geometry={board.geometry1}
+        material={board.material1}
+      />
+      <mesh
+        receiveShadow
+        geometry={board.geometry2}
+        material={board.material2}
+      />
     </group>
   );
 }
-
-useGLTF.preload("/board.glb");

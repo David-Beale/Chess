@@ -1,7 +1,7 @@
 import { useSize } from "../../hooks/useSize";
 import Background from "./Background/Background";
 import { BoardContainer } from "./TestBoardStyle";
-import useBoard from "./useBoard";
+import useBoard from "../../hooks/useBoard";
 import BoardUI from "./BoardUI/BoardUI";
 import Pieces from "./Pieces/Pieces";
 
