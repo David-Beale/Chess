@@ -1,11 +1,16 @@
-import { Game, move, status, moves, aiMove } from "js-chess-engine";
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
+/* eslint-disable no-restricted-globals */
 
-export default class Board {
-  constructor(myColor) {
+const Game = this["js-chess-engine"].Game;
+
+class ChessGame {
+  constructor() {
     this.matrix = null;
     this.lookup = {};
     this.pieces = [];
-    this.init(myColor);
+    this.init();
+    this.aiLevel = 3;
   }
   init() {
     this.matrix = [];
@@ -56,6 +61,7 @@ export default class Board {
     const tempPieces = { ...pieces };
     const missingPieces = [];
     this.pieces.forEach((piece) => {
+      if (!piece.alive) return;
       if (tempPieces[piece.location] === piece.name) {
         delete tempPieces[piece.location];
         return;
@@ -100,7 +106,7 @@ export default class Board {
     this.updateBoard(from, to);
   }
   aiMove() {
-    const playedMove = this.game.aiMove();
+    const playedMove = this.game.aiMove(this.aiLevel);
     for (const from in playedMove) {
       const to = playedMove[from];
       this.updateBoard(from, to);

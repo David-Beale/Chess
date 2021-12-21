@@ -8,8 +8,7 @@ import Pieces from "./Pieces/Pieces";
 export default function TestBoard() {
   const [boardPositions, pieces] = useBoard();
   const size = useSize();
-
-  if (!boardPositions) return null;
+  if (!boardPositions || !pieces) return null;
   return (
     <BoardContainer size={size}>
       <Background />

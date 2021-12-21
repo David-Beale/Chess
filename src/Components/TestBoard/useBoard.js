@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState, useMemo } from "react";
-import Board from "./BoardClass";
+import { useEffect, useRef, useState } from "react";
 import { useStore } from "../../Store/store";
+const worker = new Worker("./chess/chessWorker.js");
 
 export default function useBoard() {
   const [boardPositions, setBoardPositions] = useState();
@@ -15,30 +15,31 @@ export default function useBoard() {
   const setCheckMate = useStore((state) => state.setCheckMate);
   const fromRef = useRef(null);
 
-  const board = useMemo(() => {
-    return new Board("white");
-  }, []);
-
   useEffect(() => {
     initPlayer({ myColor: "white", currentPlayer: "white" });
-    setBoardPositions(board.getBoardPositions());
-    setPieces(board.getPieces());
-  }, [board, initPlayer]);
+    worker.postMessage({ init: true });
+  }, [initPlayer]);
+
+  useEffect(() => {
+    worker.onmessage = (e) => {
+      const { boardPositions, pieces, check, checkMate } = e.data;
+      setBoardPositions(boardPositions);
+      setPieces(pieces);
+      resetClicks();
+      // togglePlayer();
+      setCheck(check);
+      setCheckMate(checkMate);
+    };
+  }, [resetClicks, setCheck, setCheckMate]);
+
   useEffect(() => {
     fromRef.current = from;
   }, [from]);
 
   useEffect(() => {
     if (!to) return;
-    board.move(fromRef.current, to);
-    setBoardPositions(board.getBoardPositions());
-    setPieces(board.getPieces());
-    // togglePlayer();
-    resetClicks();
-    // board.aiMove();
-    const [check, checkMate] = board.isChecked();
-    setCheck(check);
-    setCheckMate(checkMate);
-  }, [board, to, resetClicks, togglePlayer, setCheck, setCheckMate]);
+    worker.postMessage({ from: fromRef.current, to });
+    worker.postMessage({ ai: true });
+  }, [to]);
   return [boardPositions, pieces];
 }
