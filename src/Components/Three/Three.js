@@ -16,8 +16,9 @@ export default function Three() {
       shadows
     >
       <NoEffects>
-        <ambientLight intensity={5} />
-        <pointLight intensity={5} position={[0, 35, 0]} />
+        <ambientLight intensity={1} />
+        <pointLight intensity={1} position={[0, 2035, 0]} />
+        <directionalLight intensity={1} position={[0, 2035, 35]} />
         <Board position={[0, 2000, 0]} rotation={[0, Math.PI / 2, 0]} />
       </NoEffects>
       <Effects>
