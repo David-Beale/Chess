@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
 const MIN = -20.8;
-const SIZE = 6;
+const SIZE = 5.94;
 
 const colToIndex = {
   A: 0,
