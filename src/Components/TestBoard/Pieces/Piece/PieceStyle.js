@@ -8,6 +8,7 @@ export const PieceContainer = styled.div`
   width: ${({ size }) => size}px;
   transform: ${({ translate }) =>
     `translate(${translate[0]}px, ${translate[1]}px)`};
+  transition: transform 500ms ease-in-out;
 `;
 export const PieceBackground = styled.div`
   position: absolute;
