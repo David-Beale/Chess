@@ -33,6 +33,7 @@ export default function Piece({ piece, size }) {
     setTranslate([x, y]);
   }, [piece.location, size]);
 
+  if (!piece.alive) return null;
   return (
     <PieceContainer size={size} translate={translate}>
       <PieceBackground size={size / 2} color={piece.color}>
