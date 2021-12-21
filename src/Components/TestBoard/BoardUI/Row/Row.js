@@ -1,11 +1,11 @@
 import Cell from "./Cell/Cell";
 import { RowContainer } from "./RowStyle";
 
-export function Row({ row, size }) {
+export function Row({ row }) {
   return (
-    <RowContainer size={size}>
+    <RowContainer>
       {row.map((cell, index) => (
-        <Cell key={index} cell={cell} size={size / 8} />
+        <Cell key={index} cell={cell} />
       ))}
     </RowContainer>
   );

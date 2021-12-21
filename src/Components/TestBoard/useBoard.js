@@ -4,6 +4,8 @@ import { useStore } from "../../Store/store";
 
 export default function useBoard() {
   const [boardPositions, setBoardPositions] = useState();
+  const [pieces, setPieces] = useState();
+
   const from = useStore((state) => state.from);
   const to = useStore((state) => state.to);
   const initPlayer = useStore((state) => state.initPlayer);
@@ -20,8 +22,8 @@ export default function useBoard() {
   useEffect(() => {
     initPlayer({ myColor: "white", currentPlayer: "white" });
     setBoardPositions(board.getBoardPositions());
+    setPieces(board.getPieces());
   }, [board, initPlayer]);
-
   useEffect(() => {
     fromRef.current = from;
   }, [from]);
@@ -30,6 +32,7 @@ export default function useBoard() {
     if (!to) return;
     board.move(fromRef.current, to);
     setBoardPositions(board.getBoardPositions());
+    setPieces(board.getPieces());
     // togglePlayer();
     resetClicks();
     // board.aiMove();
@@ -37,5 +40,5 @@ export default function useBoard() {
     setCheck(check);
     setCheckMate(checkMate);
   }, [board, to, resetClicks, togglePlayer, setCheck, setCheckMate]);
-  return boardPositions;
+  return [boardPositions, pieces];
 }
