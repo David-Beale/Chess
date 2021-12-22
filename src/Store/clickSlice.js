@@ -3,7 +3,7 @@ export const clickSlice = (set, get) => ({
   selectedLocation: null,
   from: null,
   to: null,
-  moves: {},
+  moves: [],
   setFrom: (location) => set(() => ({ selectedLocation: location })),
   setLocation: (location, moves) => {
     const from = get().from;
@@ -17,14 +17,15 @@ export const clickSlice = (set, get) => ({
       set(() => ({ to: location }));
     }
   },
-  resetClicks: () =>
-    set(() => ({ selectedLocation: null, from: null, to: null, moves: {} })),
+  resetClicks: () => set(() => ({ moves: [] })),
   setCurrent: (location) => {
     const current = get().currentSelected;
     if (location === current) {
-      set(() => ({ currentSelected: null }));
+      set(() => ({ currentSelected: null, moves: [] }));
     } else {
-      set(() => ({ currentSelected: location }));
+      const moves = get().allMoves[location];
+      if (!moves) return;
+      set(() => ({ currentSelected: location, moves }));
     }
   },
 });

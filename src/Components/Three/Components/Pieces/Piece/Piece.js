@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useStore } from "../../../../../Store/store";
-import { convertLocationToWorld } from "./convertLocationToWorld";
+import { convertLocationToWorld } from "../../../convertLocationToWorld";
 import { useFloating } from "./useFloating";
 
 export default function Piece({ object, location, selected }) {

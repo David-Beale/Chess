@@ -14,8 +14,8 @@ self.onmessage = (e) => {
   if (ai) {
     game.aiMove();
   }
-  const boardPositions = game.getBoardPositions();
+  const moves = game.getMoves();
   const pieces = game.getPieces();
   const [check, checkMate] = game.isChecked();
-  self.postMessage({ boardPositions, pieces, check, checkMate });
+  self.postMessage({ moves, pieces, check, checkMate });
 };

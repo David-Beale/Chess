@@ -6,33 +6,19 @@ const Game = this["js-chess-engine"].Game;
 
 class ChessGame {
   constructor() {
-    this.matrix = null;
-    this.lookup = {};
     this.pieces = [];
+    this.moves = {};
     this.init();
     this.aiLevel = 3;
+    this.check = false;
+    this.checkMate = false;
   }
   init() {
-    this.matrix = [];
-    for (let r = 8; r > 0; r--) {
-      const newRow = [];
-      for (let c = 65; c < 73; c++) {
-        const col = String.fromCharCode(c);
-        const location = `${col}${r}`;
-        const cell = {
-          moves: null,
-          location,
-        };
-        newRow.push(cell);
-        this.lookup[location] = cell;
-      }
-      this.matrix.push(newRow);
-    }
     this.game = new Game();
     this.updateBoard();
   }
-  getBoardPositions() {
-    return [...this.matrix];
+  getMoves() {
+    return this.moves;
   }
   getPieces() {
     return [...this.pieces];
@@ -41,13 +27,8 @@ class ChessGame {
     const { pieces, moves, check, checkMate } = this.game.exportJson();
     this.check = check;
     this.checkMate = checkMate;
-    this.matrix.forEach((row) => {
-      row.forEach((cell) => {
-        cell.moves = moves[cell.location] ? moves[cell.location] : null;
-      });
-    });
-
     this.updatePieces(pieces);
+    this.moves = moves;
   }
   findPiece(piecesObject, name) {
     const array = Object.keys(piecesObject);

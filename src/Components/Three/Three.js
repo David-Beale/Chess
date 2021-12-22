@@ -14,6 +14,7 @@ import useChessSet from "./useChessSet";
 import Pieces from "./Components/Pieces/Pieces";
 import { useRef } from "react";
 import Lighting from "./Components/Lighting/Lighting";
+import Moves from "./Components/Moves/Moves";
 
 export default function Three() {
   const chessSet = useChessSet();
@@ -35,6 +36,7 @@ export default function Three() {
 
           <Board board={chessSet.board} boardRef={boardRef} />
           <Pieces chessSet={chessSet} />
+          <Moves />
         </group>
       </NoEffects>
       <Effects>

@@ -3,8 +3,6 @@ import { useStore } from "../Store/store";
 const worker = new Worker("./chess/chessWorker.js");
 
 export default function useBoard() {
-  const [boardPositions, setBoardPositions] = useState();
-
   const from = useStore((state) => state.from);
   const to = useStore((state) => state.to);
   const initPlayer = useStore((state) => state.initPlayer);
@@ -13,6 +11,7 @@ export default function useBoard() {
   const setCheck = useStore((state) => state.setCheck);
   const setCheckMate = useStore((state) => state.setCheckMate);
   const setPieces = useStore((state) => state.setPieces);
+  const setAllMoves = useStore((state) => state.setAllMoves);
   const fromRef = useRef(null);
 
   useEffect(() => {
@@ -22,16 +21,15 @@ export default function useBoard() {
 
   useEffect(() => {
     worker.onmessage = (e) => {
-      const { boardPositions, pieces, check, checkMate } = e.data;
-      console.log(boardPositions);
-      setBoardPositions(boardPositions);
+      const { moves, pieces, check, checkMate } = e.data;
+      setAllMoves(moves);
       setPieces(pieces);
       resetClicks();
       // togglePlayer();
       setCheck(check);
       setCheckMate(checkMate);
     };
-  }, [resetClicks, setCheck, setCheckMate, setPieces]);
+  }, [resetClicks, setCheck, setCheckMate, setPieces, setAllMoves]);
 
   useEffect(() => {
     fromRef.current = from;
