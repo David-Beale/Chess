@@ -1,5 +1,5 @@
 import { useFrame } from "@react-three/fiber";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 const setSource = (source, pieceRef) => {
   source.current.rX = pieceRef.current.rotation.x;
@@ -45,19 +45,22 @@ const setTarget = ({ t, target }) => {
 };
 
 export const useFloating = (pieceRef, selected) => {
-  const prevFloating = useRef(null);
-  const progress = useRef(0);
+  const init = useRef(false);
+  const progress = useRef(false);
   const source = useRef({});
   const target = useRef({});
+  const selectedRef = useRef();
+
+  useEffect(() => {
+    if (init.current) return (init.current = true);
+    progress.current = 0;
+    selectedRef.current = selected;
+    setSource(source, pieceRef);
+  }, [pieceRef, selected]);
 
   useFrame((state) => {
-    if (!pieceRef.current) return;
-    if (selected) {
-      if (!prevFloating.current) {
-        prevFloating.current = true;
-        setSource(source, pieceRef);
-      }
-
+    if (!pieceRef.current || progress.current === false) return;
+    if (selectedRef.current) {
       setTarget({ t: state.clock.getElapsedTime(), target });
 
       if (progress.current < 1) {
@@ -68,16 +71,11 @@ export const useFloating = (pieceRef, selected) => {
         update(pieceRef, target);
       }
     } else {
-      if (progress.current <= 0) return;
-      if (prevFloating.current) {
-        prevFloating.current = false;
-        setSource(source, pieceRef);
-      }
-
       setTarget({ target });
-      progress.current -= 0.08;
-      if (progress.current < 0) progress.current = 0;
-      interpolateFloating(1 - progress.current, source, pieceRef, target);
+      progress.current += 0.08;
+      if (progress.current > 1) progress.current = 1;
+      interpolateFloating(progress.current, source, pieceRef, target);
+      if (progress.current === 1) progress.current = false;
     }
   });
 };
