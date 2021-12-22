@@ -41,7 +41,7 @@ export const useMove = (pieceRef, location) => {
   useFrame(() => {
     if (!pieceRef.current || progress.current === false) return;
 
-    progress.current += 0.08;
+    progress.current += 0.04;
     if (progress.current > 1) progress.current = 1;
     interpolatePosition(progress.current, source, pieceRef, target);
     if (progress.current >= 1) progress.current = false;

@@ -73,7 +73,7 @@ export const useFloating = (pieceRef, selected) => {
       }
     } else {
       setTarget({ target });
-      progress.current += 0.08;
+      progress.current += 0.04;
       if (progress.current > 1) progress.current = 1;
       interpolateFloating(progress.current, source, pieceRef, target);
       if (progress.current === 1) progress.current = false;
