@@ -1,24 +1,20 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useStore } from "../../../../../Store/store";
-import { convertLocationToWorld } from "../../../convertLocationToWorld";
 import { useFloating } from "./useFloating";
+import { useMove } from "./useMove";
 
-export default function Piece({ object, location, selected }) {
+export default function Piece({ object, location, selected, alive }) {
   const pieceRef = useRef();
   const setCurrent = useStore((state) => state.setCurrent);
 
-  useEffect(() => {
-    const [x, z] = convertLocationToWorld(location);
-    pieceRef.current.position.x = x;
-    pieceRef.current.position.z = z;
-  }, [location]);
-
   useFloating(pieceRef, selected);
+  useMove(pieceRef, location);
 
   const onClick = (e) => {
     e.stopPropagation();
     setCurrent(location);
   };
+  if (!alive) return null;
   return (
     <group ref={pieceRef} onClick={onClick}>
       <mesh

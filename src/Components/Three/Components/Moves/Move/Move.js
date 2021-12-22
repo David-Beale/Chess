@@ -1,8 +1,10 @@
 import { Plane } from "@react-three/drei";
 import { useEffect, useRef } from "react";
+import { useStore } from "../../../../../Store/store";
 import { convertLocationToWorld } from "../../../convertLocationToWorld";
 
 export default function Move({ location }) {
+  const setTarget = useStore((state) => state.setTarget);
   const moveRef = useRef();
 
   useEffect(() => {
@@ -12,8 +14,17 @@ export default function Move({ location }) {
     moveRef.current.position.z = z;
   }, [location]);
 
+  const onClick = () => {
+    setTarget(location);
+  };
+
   return (
-    <Plane ref={moveRef} args={[5.94, 5.94]} rotation={[-Math.PI / 2, 0, 0]}>
+    <Plane
+      ref={moveRef}
+      args={[5.94, 5.94]}
+      rotation={[-Math.PI / 2, 0, 0]}
+      onClick={onClick}
+    >
       <meshStandardMaterial color="green" transparent opacity={0.4} />
     </Plane>
   );

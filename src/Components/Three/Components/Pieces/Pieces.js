@@ -10,6 +10,7 @@ export default function Pieces({ chessSet }) {
       key={piece.id}
       object={chessSet[piece.name]}
       location={piece.location}
+      alive={piece.alive}
       selected={currentSelected === piece.location}
     />
   ));

@@ -3,8 +3,9 @@ import { useStore } from "../Store/store";
 const worker = new Worker("./chess/chessWorker.js");
 
 export default function useBoard() {
-  const from = useStore((state) => state.from);
-  const to = useStore((state) => state.to);
+  const from = useStore((state) => state.currentSelected);
+  const to = useStore((state) => state.target);
+
   const initPlayer = useStore((state) => state.initPlayer);
   const resetClicks = useStore((state) => state.resetClicks);
   const togglePlayer = useStore((state) => state.togglePlayer);
