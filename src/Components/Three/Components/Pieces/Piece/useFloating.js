@@ -53,6 +53,7 @@ export const useFloating = (pieceRef, selected) => {
 
   useEffect(() => {
     if (init.current) return (init.current = true);
+    if (!pieceRef.current) return;
     progress.current = 0;
     selectedRef.current = selected;
     setSource(source, pieceRef);

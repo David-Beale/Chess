@@ -24,6 +24,7 @@ export default function Move({ location }) {
       args={[5.94, 5.94]}
       rotation={[-Math.PI / 2, 0, 0]}
       onClick={onClick}
+      position={[0, -100, 0]}
     >
       <meshStandardMaterial color="green" transparent opacity={0.4} />
     </Plane>
