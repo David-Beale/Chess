@@ -1,14 +1,6 @@
-export const playerSlice = (set, get) => ({
+export const playerSlice = (set) => ({
   myColor: null,
   currentPlayer: null,
   setCurrentPlayer: (player) => set(() => ({ currentPlayer: player })),
-  initPlayer: ({ myColor, currentPlayer }) =>
-    set(() => ({ myColor, currentPlayer })),
-  togglePlayer: () => {
-    const currentPlayer = get().currentPlayer;
-
-    set(() => ({
-      currentPlayer: currentPlayer === "white" ? "black" : "white",
-    }));
-  },
+  initPlayer: (myColor) => set(() => ({ myColor })),
 });

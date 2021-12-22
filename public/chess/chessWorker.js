@@ -16,6 +16,7 @@ self.onmessage = (e) => {
   }
   const moves = game.getMoves();
   const pieces = game.getPieces();
+  const turn = game.getTurn();
   const [check, checkMate] = game.isChecked();
-  self.postMessage({ moves, pieces, check, checkMate });
+  self.postMessage({ moves, pieces, check, checkMate, turn });
 };

@@ -21,14 +21,18 @@ class ChessGame {
     return this.moves;
   }
   getPieces() {
-    return [...this.pieces];
+    return this.pieces;
+  }
+  getTurn() {
+    return this.turn;
   }
   updateBoard() {
-    const { pieces, moves, check, checkMate } = this.game.exportJson();
+    const { pieces, moves, check, checkMate, turn } = this.game.exportJson();
     this.check = check;
     this.checkMate = checkMate;
-    this.updatePieces(pieces);
+    this.turn = turn;
     this.moves = moves;
+    this.updatePieces(pieces);
   }
   findPiece(piecesObject, name) {
     const array = Object.keys(piecesObject);

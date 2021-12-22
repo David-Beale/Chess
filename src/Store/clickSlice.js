@@ -12,6 +12,9 @@ export const clickSlice = (set, get) => ({
   resetClicks: () =>
     set(() => ({ moves: [], currentSelected: null, target: null })),
   setCurrent: (location) => {
+    const { myColor, currentPlayer } = get();
+    if (myColor !== currentPlayer) return;
+
     const current = get().currentSelected;
     if (alreadySelected(location, current)) {
       set(() => ({ currentSelected: null, moves: [] }));
