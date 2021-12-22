@@ -23,6 +23,7 @@ export default function useBoard() {
   useEffect(() => {
     worker.onmessage = (e) => {
       const { boardPositions, pieces, check, checkMate } = e.data;
+      console.log(boardPositions);
       setBoardPositions(boardPositions);
       setPieces(pieces);
       resetClicks();

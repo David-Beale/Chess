@@ -1,4 +1,5 @@
 export const clickSlice = (set, get) => ({
+  currentSelected: null,
   selectedLocation: null,
   from: null,
   to: null,
@@ -18,4 +19,12 @@ export const clickSlice = (set, get) => ({
   },
   resetClicks: () =>
     set(() => ({ selectedLocation: null, from: null, to: null, moves: {} })),
+  setCurrent: (location) => {
+    const current = get().currentSelected;
+    if (location === current) {
+      set(() => ({ currentSelected: null }));
+    } else {
+      set(() => ({ currentSelected: location }));
+    }
+  },
 });

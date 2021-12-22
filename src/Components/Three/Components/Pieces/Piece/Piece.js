@@ -1,48 +1,33 @@
 import { useEffect, useRef } from "react";
+import { useStore } from "../../../../../Store/store";
+import { convertLocationToWorld } from "./convertLocationToWorld";
+import { useFloating } from "./useFloating";
 
-const MIN = -20.8;
-const SIZE = 5.94;
-
-const colToIndex = {
-  A: 0,
-  B: 1,
-  C: 2,
-  D: 3,
-  E: 4,
-  F: 5,
-  G: 6,
-  H: 7,
-};
-const rowToIndex = {
-  8: 0,
-  7: 1,
-  6: 2,
-  5: 3,
-  4: 4,
-  3: 5,
-  2: 6,
-  1: 7,
-};
-const convertLocationToWorld = (location) => {
-  const colIndex = colToIndex[location[0]];
-  const rowIndex = rowToIndex[location[1]];
-  return [MIN + colIndex * SIZE, MIN + rowIndex * SIZE];
-};
-
-export default function Piece({ object, location }) {
+export default function Piece({ object, location, selected }) {
   const pieceRef = useRef();
+  const setCurrent = useStore((state) => state.setCurrent);
+
   useEffect(() => {
     const [x, z] = convertLocationToWorld(location);
     pieceRef.current.position.x = x;
     pieceRef.current.position.z = z;
   }, [location]);
+
+  useFloating(pieceRef, selected);
+
+  const onClick = (e) => {
+    e.stopPropagation();
+    setCurrent(location);
+  };
   return (
-    <group
-      ref={pieceRef}
-      rotation={[-Math.PI / 2, 0, object.rotation]}
-      scale={[100, 100, 100]}
-    >
-      <mesh castShadow geometry={object.geometry} material={object.material} />
+    <group ref={pieceRef} onClick={onClick}>
+      <mesh
+        scale={[100, 100, 100]}
+        rotation={[-Math.PI / 2, 0, object.rotation]}
+        castShadow
+        geometry={object.geometry}
+        material={object.material}
+      />
     </group>
   );
 }
