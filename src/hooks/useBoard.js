@@ -2,9 +2,16 @@ import { useEffect, useRef } from "react";
 import { useStore } from "../Store/store";
 const worker = new Worker("./chess/chessWorker.js");
 
+const calcTimeout = (timer) => {
+  if (!timer) return 0;
+  const diff = Date.now() - timer;
+  if (diff > 1000) return 0;
+  return 1000 - diff;
+};
 export default function useBoard() {
   const from = useStore((state) => state.currentSelected);
   const to = useStore((state) => state.target);
+  const timer = useRef();
 
   const fromRef = useRef(null);
 
@@ -24,12 +31,16 @@ export default function useBoard() {
   useEffect(() => {
     worker.onmessage = (e) => {
       const { moves, pieces, check, checkMate, turn } = e.data;
-      setAllMoves(moves);
-      setPieces(pieces);
-      resetClicks();
-      setCheck(check);
-      setCurrentPlayer(turn);
-      setCheckMate(checkMate);
+      const timeout = calcTimeout(timer.current);
+      setTimeout(() => {
+        setAllMoves(moves);
+        setPieces(pieces);
+        resetClicks();
+        setCheck(check);
+        setCurrentPlayer(turn);
+        setCheckMate(checkMate);
+        timer.current = Date.now();
+      }, timeout);
     };
   }, [
     resetClicks,

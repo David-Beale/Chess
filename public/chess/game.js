@@ -9,7 +9,7 @@ class ChessGame {
     this.pieces = [];
     this.moves = {};
     this.init();
-    this.aiLevel = 3;
+    this.aiLevel = 0;
     this.check = false;
     this.checkMate = false;
   }
