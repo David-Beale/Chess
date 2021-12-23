@@ -1,3 +1,7 @@
+// Model Information:
+// * title:	Chess Board - #3December2020 Day4 - Board Game
+// * source:	https://sketchfab.com/3d-models/chess-board-3december2020-day4-board-game-12f3187003da4241bf8210b86cfa00f5
+// * author:	LordDiego (https://sketchfab.com/LordDiego)
 import { useMemo } from "react";
 import { useGLTF } from "@react-three/drei";
 import gltf from "../../Assets/chess.glb";
