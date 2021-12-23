@@ -1,25 +1,27 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-restricted-globals */
 importScripts("js-chess-engine.js");
-// importScripts("test2.js");
 importScripts("game.js");
 
 const game = new ChessGame();
 
 self.onmessage = (e) => {
-  const { from, to, init, ai } = e.data;
-  if (init) {
-    game.init();
+  const { type } = e.data;
+  switch (type) {
+    case "init":
+      game.init();
+      self.postMessage(game.getPayload());
+      break;
+    case "move":
+      const { from, to } = e.data;
+      game.move(from, to);
+      self.postMessage(game.getPayload());
+      break;
+    case "aiMove":
+      game.aiMove();
+      self.postMessage(game.getPayload());
+      break;
+    default:
+      break;
   }
-  if (from && to) {
-    game.move(from, to);
-  }
-  if (ai) {
-    game.aiMove();
-  }
-  const moves = game.getMoves();
-  const pieces = game.getPieces();
-  const turn = game.getTurn();
-  const [check, checkMate] = game.isChecked();
-  self.postMessage({ moves, pieces, check, checkMate, turn });
 };

@@ -17,15 +17,16 @@ class ChessGame {
     this.pieces = [];
     this.updateBoard();
   }
-  getMoves() {
-    return this.moves;
+  getPayload() {
+    return {
+      moves: this.moves,
+      pieces: this.pieces,
+      turn: this.turn,
+      check: this.check,
+      checkMate: this.checkMate,
+    };
   }
-  getPieces() {
-    return this.pieces;
-  }
-  getTurn() {
-    return this.turn;
-  }
+
   updateBoard() {
     const { pieces, moves, check, checkMate, turn } = this.game.exportJson();
     this.check = check;
@@ -93,9 +94,7 @@ class ChessGame {
       this.pieces.push(newPiece);
     }
   }
-  isChecked() {
-    return [this.check, this.checkMate];
-  }
+
   move(from, to) {
     this.game.move(from, to);
     this.updateBoard(from, to);

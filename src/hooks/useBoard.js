@@ -26,7 +26,7 @@ export default function useBoard() {
 
   useEffect(() => {
     initPlayer("white");
-    worker.postMessage({ init: true });
+    worker.postMessage({ type: "init" });
   }, [initPlayer, newGame]);
 
   useEffect(() => {
@@ -58,7 +58,7 @@ export default function useBoard() {
 
   useEffect(() => {
     if (!to) return;
-    worker.postMessage({ from: fromRef.current, to });
-    worker.postMessage({ ai: true });
+    worker.postMessage({ type: "move", from: fromRef.current, to });
+    worker.postMessage({ type: "aiMove" });
   }, [to]);
 }
