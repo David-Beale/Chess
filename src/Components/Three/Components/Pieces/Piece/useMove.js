@@ -21,6 +21,7 @@ export const useMove = (pieceRef, location) => {
   const target = useRef({});
 
   useEffect(() => {
+    if (!location) return (init.current = false);
     if (!pieceRef.current) return;
     const [x, z] = convertLocationToWorld(location);
     if (!init.current) {

@@ -5,6 +5,7 @@ import MenuButton from "./Components/MenuButton/MenuButton";
 
 import { Container, TopContainer } from "./MenuStyle";
 import ToggleCameraLock from "./Components/ToggleCameraLock/ToggleCameraLock";
+import NewGameButton from "./Components/NewGame/NewGameButton";
 
 export default memo(function Menu() {
   const [menuOpen, setMenuOpen] = useState(true);
@@ -17,6 +18,7 @@ export default memo(function Menu() {
           <TopContainer>
             <ToggleCameraLock />
           </TopContainer>
+          <NewGameButton />
         </Container>
       </Drawer>
     </>

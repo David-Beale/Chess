@@ -22,11 +22,12 @@ export default function useBoard() {
   const setPieces = useStore((state) => state.setPieces);
   const setAllMoves = useStore((state) => state.setAllMoves);
   const setCurrentPlayer = useStore((state) => state.setCurrentPlayer);
+  const newGame = useStore((state) => state.newGame);
 
   useEffect(() => {
     initPlayer("white");
     worker.postMessage({ init: true });
-  }, [initPlayer]);
+  }, [initPlayer, newGame]);
 
   useEffect(() => {
     worker.onmessage = (e) => {

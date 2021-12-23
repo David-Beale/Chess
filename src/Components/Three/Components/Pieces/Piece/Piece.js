@@ -3,7 +3,7 @@ import { useStore } from "../../../../../Store/store";
 import { useFloating } from "./useFloating";
 import { useMove } from "./useMove";
 
-export default memo(function Piece({ object, location, selected, alive }) {
+export default memo(function Piece({ object, location, selected }) {
   const pieceRef = useRef();
   const setCurrent = useStore((state) => state.setCurrent);
 
@@ -14,7 +14,7 @@ export default memo(function Piece({ object, location, selected, alive }) {
     e.stopPropagation();
     setCurrent(location);
   };
-  if (!alive) return null;
+  if (!location) return null;
   return (
     <group ref={pieceRef} onClick={onClick}>
       <mesh

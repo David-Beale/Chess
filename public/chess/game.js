@@ -8,13 +8,13 @@ class ChessGame {
   constructor() {
     this.pieces = [];
     this.moves = {};
-    this.init();
     this.aiLevel = 0;
     this.check = false;
     this.checkMate = false;
   }
   init() {
     this.game = new Game();
+    this.pieces = [];
     this.updateBoard();
   }
   getMoves() {
@@ -46,7 +46,7 @@ class ChessGame {
     const tempPieces = { ...pieces };
     const missingPieces = [];
     this.pieces.forEach((piece) => {
-      if (!piece.alive) return;
+      if (!piece.location) return;
       if (tempPieces[piece.location] === piece.name) {
         delete tempPieces[piece.location];
         return;
@@ -56,7 +56,7 @@ class ChessGame {
     missingPieces.forEach((piece) => {
       const newLocation = this.findPiece(tempPieces, piece.name);
       if (!newLocation) {
-        piece.alive = false;
+        piece.location = null;
         return;
       }
       piece.location = newLocation;
@@ -70,7 +70,6 @@ class ChessGame {
       const newQueen = missingPieces.find(
         (piece) => piece.name.toLowerCase() === "p"
       );
-      newQueen.alive = true;
       newQueen.name = tempPieces[remainingPieces[0]];
       newQueen.location = remainingPieces[0];
     }
@@ -90,7 +89,6 @@ class ChessGame {
           pieces[location].charAt(0).toUpperCase()
             ? "white"
             : "black",
-        alive: true,
       };
       this.pieces.push(newPiece);
     }
