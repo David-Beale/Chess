@@ -1,9 +1,9 @@
-import { useRef } from "react";
+import { memo, useRef } from "react";
 import { useStore } from "../../../../../Store/store";
 import { useFloating } from "./useFloating";
 import { useMove } from "./useMove";
 
-export default function Piece({ object, location, selected, alive }) {
+export default memo(function Piece({ object, location, selected, alive }) {
   const pieceRef = useRef();
   const setCurrent = useStore((state) => state.setCurrent);
 
@@ -26,4 +26,4 @@ export default function Piece({ object, location, selected, alive }) {
       />
     </group>
   );
-}
+});
