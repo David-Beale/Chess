@@ -23,6 +23,7 @@ export default function useBoard() {
   const setAllMoves = useStore((state) => state.setAllMoves);
   const setCurrentPlayer = useStore((state) => state.setCurrentPlayer);
   const newGame = useStore((state) => state.newGame);
+  const aiLevel = useStore((state) => state.aiLevel);
 
   useEffect(() => {
     initPlayer("white");
@@ -61,4 +62,8 @@ export default function useBoard() {
     worker.postMessage({ type: "move", from: fromRef.current, to });
     worker.postMessage({ type: "aiMove" });
   }, [to]);
+
+  useEffect(() => {
+    worker.postMessage({ type: "aiLevel", aiLevel });
+  }, [aiLevel]);
 }

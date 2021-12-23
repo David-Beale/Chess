@@ -21,6 +21,10 @@ self.onmessage = (e) => {
       game.aiMove();
       self.postMessage(game.getPayload());
       break;
+    case "aiLevel":
+      const { aiLevel } = e.data;
+      game.updateAi(aiLevel);
+      break;
     default:
       break;
   }

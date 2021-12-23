@@ -100,10 +100,14 @@ class ChessGame {
     this.updateBoard(from, to);
   }
   aiMove() {
+    console.log(this.aiLevel);
     const playedMove = this.game.aiMove(this.aiLevel);
     for (const from in playedMove) {
       const to = playedMove[from];
       this.updateBoard(from, to);
     }
+  }
+  updateAi(aiLevel) {
+    this.aiLevel = aiLevel;
   }
 }

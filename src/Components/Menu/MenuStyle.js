@@ -34,7 +34,7 @@ export const SubContainer = styled.div`
   width: 100%;
   border-radius: 10px;
   box-shadow: 0 0 10px -1px slategray;
-  height: 70px;
+  height: ${({ height }) => (height ? height : 80)}px;
 `;
 export const Row = styled.div`
   width: 100%;
