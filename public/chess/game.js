@@ -62,6 +62,18 @@ class ChessGame {
       piece.location = newLocation;
       delete tempPieces[piece.location];
     });
+    this.checkForNewQueen(tempPieces, missingPieces);
+  }
+  checkForNewQueen(tempPieces, missingPieces) {
+    const remainingPieces = Object.keys(tempPieces);
+    if (remainingPieces.length) {
+      const newQueen = missingPieces.find(
+        (piece) => piece.name.toLowerCase() === "p"
+      );
+      newQueen.alive = true;
+      newQueen.name = tempPieces[remainingPieces[0]];
+      newQueen.location = remainingPieces[0];
+    }
   }
   initPieces(pieces) {
     let id = 0;
