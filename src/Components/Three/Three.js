@@ -1,12 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import {
-  Box,
-  OrbitControls,
-  Plane,
-  Sky,
-  Stars,
-  Stats,
-} from "@react-three/drei";
+import { Sky, Stars, Stats } from "@react-three/drei";
 import Board from "./Components/Board/Board";
 import Effects from "./Effects/Effects";
 import NoEffects from "./NoEffects/NoEffects";
@@ -15,6 +8,7 @@ import Pieces from "./Components/Pieces/Pieces";
 import { useRef } from "react";
 import Lighting from "./Components/Lighting/Lighting";
 import Moves from "./Components/Moves/Moves";
+import Camera from "./Components/Camera/Camera";
 
 export default function Three() {
   const chessSet = useChessSet();
@@ -46,7 +40,7 @@ export default function Three() {
         </group>
       </Effects>
       <Stats className="stats" />
-      <OrbitControls target={[0, 0, 0]} />
+      <Camera />
     </Canvas>
   );
 }

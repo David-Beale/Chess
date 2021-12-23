@@ -4,6 +4,7 @@ import Drawer from "@material-ui/core/Drawer";
 import MenuButton from "./Components/MenuButton/MenuButton";
 
 import { Container, TopContainer } from "./MenuStyle";
+import ToggleCameraLock from "./Components/ToggleCameraLock/ToggleCameraLock";
 
 export default memo(function Menu() {
   const [menuOpen, setMenuOpen] = useState(true);
@@ -13,7 +14,9 @@ export default memo(function Menu() {
       <MenuButton setMenuOpen={setMenuOpen} menuOpen={menuOpen} />
       <Drawer variant="persistent" anchor="left" open={menuOpen}>
         <Container>
-          <TopContainer></TopContainer>
+          <TopContainer>
+            <ToggleCameraLock />
+          </TopContainer>
         </Container>
       </Drawer>
     </>
