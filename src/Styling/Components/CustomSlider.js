@@ -25,8 +25,9 @@ const styles = {
     marginLeft: "-40px",
     backgroundColor: "transparent",
     borderRadius: "20px",
+    opacity: 1,
     boxShadow:
-      "inset -4px -4px 8px rgba(255, 255, 255, 1), inset 8px 8px 16px rgba(0, 0, 0, 0.8)",
+      "inset -4px -4px 8px rgba(255, 255, 255, 0.38), inset 8px 8px 16px rgba(0, 0, 0, 0.3)",
   },
   track: {
     height: "45px",

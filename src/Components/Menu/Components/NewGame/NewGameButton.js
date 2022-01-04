@@ -10,13 +10,11 @@ export default function NewGameButton() {
   const startNewGame = useStore((state) => state.startNewGame);
 
   return (
-    <>
-      <SubContainer>
-        <StyledIconButton onClick={startNewGame}>
-          <AddCircleOutlineIcon fontSize="large" />
-        </StyledIconButton>
-        New Game
-      </SubContainer>
-    </>
+    <SubContainer>
+      <StyledIconButton onClick={startNewGame}>
+        <AddCircleOutlineIcon fontSize="large" />
+      </StyledIconButton>
+      New Game
+    </SubContainer>
   );
 }

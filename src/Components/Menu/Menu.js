@@ -7,6 +7,7 @@ import { Container, TopContainer } from "./MenuStyle";
 import ToggleCameraLock from "./Components/ToggleCameraLock/ToggleCameraLock";
 import NewGameButton from "./Components/NewGame/NewGameButton";
 import AiLevelSlider from "./Components/AiLevelSlider/AiLevelSlider";
+import CurrentPlayer from "./Components/CurrentPlayer/CurrentPlayer";
 
 export default memo(function Menu() {
   const [menuOpen, setMenuOpen] = useState(true);
@@ -19,6 +20,7 @@ export default memo(function Menu() {
           <TopContainer>
             <ToggleCameraLock />
           </TopContainer>
+          <CurrentPlayer />
           <NewGameButton />
           <AiLevelSlider />
         </Container>

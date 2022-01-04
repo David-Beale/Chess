@@ -41,3 +41,13 @@ export const Row = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+export const Inset = styled.div`
+  box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.38),
+    inset 8px 8px 16px rgba(0, 0, 0, 0.3);
+  width: 330px;
+  height: 35px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
