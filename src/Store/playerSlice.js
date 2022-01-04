@@ -1,6 +1,6 @@
 export const playerSlice = (set) => ({
-  myColor: null,
+  myColor: "white",
   currentPlayer: null,
   setCurrentPlayer: (player) => set(() => ({ currentPlayer: player })),
-  initPlayer: (myColor) => set(() => ({ myColor })),
+  setPlayerColor: (myColor) => set(() => ({ myColor })),
 });

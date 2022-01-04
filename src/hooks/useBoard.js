@@ -15,7 +15,6 @@ export default function useBoard() {
 
   const fromRef = useRef(null);
 
-  const initPlayer = useStore((state) => state.initPlayer);
   const resetClicks = useStore((state) => state.resetClicks);
   const setCheck = useStore((state) => state.setCheck);
   const setCheckMate = useStore((state) => state.setCheckMate);
@@ -26,9 +25,9 @@ export default function useBoard() {
   const aiLevel = useStore((state) => state.aiLevel);
 
   useEffect(() => {
-    initPlayer("white");
-    worker.postMessage({ type: "init" });
-  }, [initPlayer, newGame]);
+    const [color] = newGame;
+    worker.postMessage({ type: "init", color });
+  }, [newGame]);
 
   useEffect(() => {
     worker.onmessage = (e) => {

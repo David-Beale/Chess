@@ -1,4 +1,4 @@
-import { useStore } from "../../../../Store/store";
+import { useStore } from "../../../../../Store/store";
 import Move from "./Move/Move";
 
 export default function Moves() {

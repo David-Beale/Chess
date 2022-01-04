@@ -1,4 +1,4 @@
-import { useStore } from "../../../../Store/store";
+import { useStore } from "../../../../../Store/store";
 import Piece from "./Piece/Piece";
 
 export default function Pieces({ chessSet }) {

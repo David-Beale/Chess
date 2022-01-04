@@ -1,10 +1,10 @@
 export const gameSlice = (set) => ({
   check: false,
   checkMate: false,
-  newGame: false,
+  newGame: ["white"],
   aiLevel: 0,
   setCheck: (check) => set(() => ({ check })),
   setCheckMate: (checkMate) => set(() => ({ checkMate })),
-  startNewGame: () => set(() => ({ newGame: [] })),
+  startNewGame: (color) => set(() => ({ newGame: [color] })),
   setAiLevel: (aiLevel) => set(() => ({ aiLevel })),
 });

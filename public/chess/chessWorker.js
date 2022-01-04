@@ -9,7 +9,9 @@ self.onmessage = (e) => {
   const { type } = e.data;
   switch (type) {
     case "init":
+      const { color } = e.data;
       game.init();
+      if (color === "black") game.aiMove();
       self.postMessage(game.getPayload());
       break;
     case "move":

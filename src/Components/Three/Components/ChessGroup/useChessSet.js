@@ -4,7 +4,7 @@
 // * author:	LordDiego (https://sketchfab.com/LordDiego)
 import { useMemo } from "react";
 import { useGLTF } from "@react-three/drei";
-import gltf from "../../Assets/chess.glb";
+import gltf from "../../../../Assets/chess.glb";
 
 export default function useChessSet() {
   const { nodes } = useGLTF(gltf);

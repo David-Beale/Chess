@@ -1,7 +1,7 @@
 import { Plane } from "@react-three/drei";
 import { useEffect, useRef } from "react";
-import { useStore } from "../../../../../Store/store";
-import { convertLocationToWorld } from "../../../convertLocationToWorld";
+import { useStore } from "../../../../../../Store/store";
+import { convertLocationToWorld } from "../../../../convertLocationToWorld";
 
 export default function Move({ location }) {
   const setTarget = useStore((state) => state.setTarget);

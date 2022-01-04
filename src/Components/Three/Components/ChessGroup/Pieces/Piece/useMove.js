@@ -1,6 +1,6 @@
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
-import { convertLocationToWorld } from "../../../convertLocationToWorld";
+import { convertLocationToWorld } from "../../../../convertLocationToWorld";
 
 const interpolate = (p, from, to) => {
   return (1 - p) * from + p * to;
