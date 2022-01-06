@@ -6,7 +6,7 @@ export const useJoinGame = () => {
   const startNewGame = useStore((state) => state.startNewGame);
   const setPlayerColor = useStore((state) => state.setPlayerColor);
   const setMode = useStore((state) => state.setMode);
-  console.log(socket);
+
   useEffect(() => {
     const pathName = window.location.pathname.slice(1);
     if (!pathName || pathName.length !== 8) return;

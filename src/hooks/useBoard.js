@@ -22,6 +22,7 @@ export default function useBoard() {
   const setPieces = useStore((state) => state.setPieces);
   const setAllMoves = useStore((state) => state.setAllMoves);
   const setCurrentPlayer = useStore((state) => state.setCurrentPlayer);
+  const setMode = useStore((state) => state.setMode);
   const newGame = useStore((state) => state.newGame);
   const aiLevel = useStore((state) => state.aiLevel);
   const mode = useStore((state) => state.mode);
@@ -74,8 +75,13 @@ export default function useBoard() {
     socket.on("move", ({ from, to }) => {
       worker.postMessage({ type: "move", from, to });
     });
+    socket.on("player disconnected", () => {
+      console.log("player disconnected");
+      setMode("ai");
+    });
     return () => {
       socket.off("move");
+      socket.off("player disconnected");
     };
-  }, [mode]);
+  }, [mode, setMode]);
 }

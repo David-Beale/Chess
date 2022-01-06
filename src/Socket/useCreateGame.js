@@ -35,12 +35,10 @@ export const useSocket = () => {
     socket.on("player connected", () => {
       setPartnerConnected(true);
     });
-    socket.on("player disconnected", () => {
-      console.log("player disconnected"); // undefined
-    });
+
     return () => {
       socket.off("game id");
-      socket.off("player disconnected");
+      socket.off("player connected");
     };
   }, [connected, setConnected, setLink, setPartnerConnected]);
 

@@ -5,7 +5,7 @@ import { StyledIconButton } from "../ToggleButtonStyle";
 
 import { SubContainer } from "../../MenuStyle";
 import InviteDialog from "./InviteDialog/InviteDialog";
-import { useSocket } from "../../../../Socket/useSocket";
+import { useSocket } from "../../../../Socket/useCreateGame";
 
 export default function InviteButton() {
   const [open, setOpen] = useState(false);

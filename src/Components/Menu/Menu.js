@@ -9,9 +9,12 @@ import NewGameButton from "./Components/NewGame/NewGameButton";
 import AiLevelSlider from "./Components/AiLevelSlider/AiLevelSlider";
 import Info from "./Components/Info/Info";
 import InviteButton from "./Components/Invite/InviteButton";
+import { useStore } from "../../Store/store";
+import LeaveButton from "./Components/Leave/LeaveButton";
 
 export default memo(function Menu() {
   const [menuOpen, setMenuOpen] = useState(true);
+  const mode = useStore((state) => state.mode);
 
   return (
     <>
@@ -22,9 +25,18 @@ export default memo(function Menu() {
             <ToggleCameraLock />
           </TopContainer>
           <Info />
-          <NewGameButton />
-          <AiLevelSlider />
-          <InviteButton />
+          {mode === "ai" && (
+            <>
+              <NewGameButton />
+              <AiLevelSlider />
+              <InviteButton />
+            </>
+          )}
+          {mode === "pvp" && (
+            <>
+              <LeaveButton />
+            </>
+          )}
         </Container>
       </Drawer>
     </>
