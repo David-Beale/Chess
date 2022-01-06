@@ -11,13 +11,18 @@ export default function CurrentPlayer() {
   return (
     <SubContainer height={80}>
       <Inset>
-        {check && <div>Check!</div>}
-        {checkMate && <div>Checkmate!</div>}
-        <div>
-          {currentPlayer === myColor
-            ? "Your turn"
-            : "Waiting for other player..."}
-        </div>
+        {checkMate ? (
+          <div>Checkmate!</div>
+        ) : (
+          <>
+            {check && <div>Check!</div>}
+            <div>
+              {currentPlayer === myColor
+                ? "Your turn"
+                : "Waiting for other player..."}
+            </div>
+          </>
+        )}
       </Inset>
     </SubContainer>
   );
