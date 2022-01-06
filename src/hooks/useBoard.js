@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { socket } from "../Socket/socket";
 import { useStore } from "../Store/store";
 const worker = new Worker("./chess/chessWorker.js");
 
@@ -23,11 +24,12 @@ export default function useBoard() {
   const setCurrentPlayer = useStore((state) => state.setCurrentPlayer);
   const newGame = useStore((state) => state.newGame);
   const aiLevel = useStore((state) => state.aiLevel);
+  const mode = useStore((state) => state.mode);
 
   useEffect(() => {
     const [color] = newGame;
-    worker.postMessage({ type: "init", color });
-  }, [newGame]);
+    worker.postMessage({ type: "init", color, mode });
+  }, [newGame, mode]);
 
   useEffect(() => {
     worker.onmessage = (e) => {
@@ -59,10 +61,21 @@ export default function useBoard() {
   useEffect(() => {
     if (!to) return;
     worker.postMessage({ type: "move", from: fromRef.current, to });
-    worker.postMessage({ type: "aiMove" });
-  }, [to]);
+    if (mode === "ai") worker.postMessage({ type: "aiMove" });
+    else socket.emit("move", { from: fromRef.current, to });
+  }, [to, mode]);
 
   useEffect(() => {
     worker.postMessage({ type: "aiLevel", aiLevel });
   }, [aiLevel]);
+
+  useEffect(() => {
+    if (mode !== "pvp") return;
+    socket.on("move", ({ from, to }) => {
+      worker.postMessage({ type: "move", from, to });
+    });
+    return () => {
+      socket.off("move");
+    };
+  }, [mode]);
 }

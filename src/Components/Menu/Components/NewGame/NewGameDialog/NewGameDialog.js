@@ -10,16 +10,20 @@ const Transition = forwardRef(function Transition(props, ref) {
 export default function NewGameDialog({ open, setOpen }) {
   const startNewGame = useStore((state) => state.startNewGame);
   const setPlayerColor = useStore((state) => state.setPlayerColor);
+  const setMode = useStore((state) => state.setMode);
+
   const onClose = () => {
     setOpen(false);
   };
   const onSelectWhite = () => {
     startNewGame("white");
     setPlayerColor("white");
+    setMode("ai");
   };
   const onSelectBlack = () => {
     startNewGame("black");
     setPlayerColor("black");
+    setMode("ai");
   };
   return (
     <Dialog

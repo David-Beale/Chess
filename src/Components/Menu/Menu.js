@@ -8,6 +8,7 @@ import ToggleCameraLock from "./Components/ToggleCameraLock/ToggleCameraLock";
 import NewGameButton from "./Components/NewGame/NewGameButton";
 import AiLevelSlider from "./Components/AiLevelSlider/AiLevelSlider";
 import Info from "./Components/Info/Info";
+import InviteButton from "./Components/Invite/InviteButton";
 
 export default memo(function Menu() {
   const [menuOpen, setMenuOpen] = useState(true);
@@ -23,6 +24,7 @@ export default memo(function Menu() {
           <Info />
           <NewGameButton />
           <AiLevelSlider />
+          <InviteButton />
         </Container>
       </Drawer>
     </>

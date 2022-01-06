@@ -35,7 +35,7 @@ export const makeMuiTheme = () =>
           maxWidth: "100%",
         },
         paper: {
-          background: "rgba(255,255,255,0.9)",
+          background: "rgb(185,185,185)",
           margin: "0",
           borderRadius: "15px",
         },
