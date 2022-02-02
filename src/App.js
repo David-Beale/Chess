@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { AppContainer } from "./AppStyle";
 import Menu from "./Components/Menu/Menu";
-import OpponentDisconnected from "./Components/Popups/OpponentDisconnected/OpponentDisconnected";
+import Notifications from "./Components/Popups/Notifications";
 import Three from "./Components/Three/Three";
 import useBoard from "./hooks/useBoard";
 import { useJoinGame } from "./Socket/useJoinGame";
@@ -13,7 +13,7 @@ export default function App() {
     <>
       <AppContainer>
         <Menu />
-        <OpponentDisconnected />
+        <Notifications />
       </AppContainer>
       <Suspense fallback={null}>
         <Three />
