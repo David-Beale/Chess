@@ -3,7 +3,6 @@ import { useStore } from "../Store/store";
 import { socket } from "./socket";
 
 export const useSocket = () => {
-  const connected = useStore((state) => state.connected);
   const setConnected = useStore((state) => state.setConnected);
   const setLink = useStore((state) => state.setLink);
   const setPartnerConnected = useStore((state) => state.setPartnerConnected);
@@ -11,10 +10,7 @@ export const useSocket = () => {
 
   const connect = () => {
     resetSocket();
-    if (!socket.id) {
-      socket.connect();
-      setConnected(true);
-    }
+    if (!socket.id) socket.connect();
   };
 
   const newGame = (color) => {
@@ -22,8 +18,8 @@ export const useSocket = () => {
   };
 
   useEffect(() => {
-    if (!connected) return;
     socket.on("connect", () => {
+      setConnected(true);
       console.log("connected", socket.id);
     });
     socket.on("disconnect", () => {
@@ -40,7 +36,7 @@ export const useSocket = () => {
       socket.off("game id");
       socket.off("player connected");
     };
-  }, [connected, setConnected, setLink, setPartnerConnected]);
+  }, [setConnected, setLink, setPartnerConnected]);
 
   return [connect, newGame];
 };

@@ -78,9 +78,11 @@ export default function useBoard() {
     socket.on("move", ({ from, to }) => {
       worker.postMessage({ type: "move", from, to });
     });
-    socket.on("player disconnected", (socketId) => {
-      if (socketId !== socket.id) setOpponentDisconnect();
+    socket.on("player disconnected", () => {
+      setOpponentDisconnect();
       setMode("ai");
+      socket.disconnect();
+      window.history.replaceState("", "", window.location.origin);
     });
     return () => {
       socket.off("move");

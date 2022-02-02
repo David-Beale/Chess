@@ -10,8 +10,9 @@ import { useStore } from "../../../../Store/store";
 export default function LeaveButton() {
   const setMode = useStore((state) => state.setMode);
   const onClick = () => {
-    socket.emit("leave");
     setMode("ai");
+    socket.disconnect();
+    window.history.replaceState("", "", window.location.origin);
   };
 
   return (
