@@ -2,9 +2,14 @@ import { useEffect } from "react";
 import { useStore } from "../Store/store";
 import { socket } from "./socket";
 
+const cleanUp = () => {
+  socket.off("connect");
+  socket.off("disconnect");
+  socket.off("player connected");
+  socket.off("error joining game");
+};
 export const useJoinGame = () => {
   const startNewGame = useStore((state) => state.startNewGame);
-  const setConnected = useStore((state) => state.setConnected);
   const setPlayerColor = useStore((state) => state.setPlayerColor);
   const setMode = useStore((state) => state.setMode);
 
@@ -13,16 +18,13 @@ export const useJoinGame = () => {
     if (!pathName || pathName.length !== 8) return;
     socket.connect();
     socket.on("connect", () => {
-      setConnected(true);
       socket.emit("join game", pathName);
     });
-
     socket.on("disconnect", () => {
-      setConnected(false);
+      cleanUp();
     });
 
     socket.on("player connected", (color) => {
-      console.log("joined");
       startNewGame(color);
       setPlayerColor(color);
       setMode("pvp");
@@ -30,11 +32,9 @@ export const useJoinGame = () => {
 
     socket.on("error joining game", () => {
       console.log("join failed");
+      socket.disconnect();
       window.history.replaceState("", "", window.location.origin);
     });
-    return () => {
-      socket.off("player connected");
-      socket.off("error joining game");
-    };
-  }, [setMode, setPlayerColor, startNewGame, setConnected]);
+    return cleanUp;
+  }, [setMode, setPlayerColor, startNewGame]);
 };
