@@ -26,6 +26,9 @@ export default function useBoard() {
   const newGame = useStore((state) => state.newGame);
   const aiLevel = useStore((state) => state.aiLevel);
   const mode = useStore((state) => state.mode);
+  const setOpponentDisconnect = useStore(
+    (state) => state.setOpponentDisconnect
+  );
 
   useEffect(() => {
     const [color] = newGame;
@@ -75,13 +78,13 @@ export default function useBoard() {
     socket.on("move", ({ from, to }) => {
       worker.postMessage({ type: "move", from, to });
     });
-    socket.on("player disconnected", () => {
-      console.log("player disconnected");
+    socket.on("player disconnected", (socketId) => {
+      if (socketId !== socket.id) setOpponentDisconnect();
       setMode("ai");
     });
     return () => {
       socket.off("move");
       socket.off("player disconnected");
     };
-  }, [mode, setMode]);
+  }, [mode, setMode, setOpponentDisconnect]);
 }

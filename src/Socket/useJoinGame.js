@@ -28,7 +28,7 @@ export const useJoinGame = () => {
     });
     return () => {
       socket.off("player connected");
-      socket.off("game does not exist");
+      socket.off("error joining game");
     };
   }, [setMode, setPlayerColor, startNewGame]);
 };
