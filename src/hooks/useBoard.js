@@ -82,7 +82,11 @@ export default function useBoard() {
       setOpponentDisconnect();
       setMode("ai");
       socket.disconnect();
-      window.history.replaceState("", "", window.location.origin);
+      window.history.replaceState(
+        "",
+        "",
+        window.location.origin + window.location.pathname
+      );
     });
     return () => {
       socket.off("move");

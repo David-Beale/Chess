@@ -15,11 +15,11 @@ export const useJoinGame = () => {
   const setErrorJoining = useStore((state) => state.setErrorJoining);
 
   useEffect(() => {
-    const pathName = window.location.pathname.slice(1);
-    if (!pathName || pathName.length !== 8) return;
+    const hash = window.location.hash;
+    if (!hash) return;
     socket.connect();
     socket.on("connect", () => {
-      socket.emit("join game", pathName);
+      socket.emit("join game", hash.slice(2));
     });
     socket.on("disconnect", () => {
       cleanUp();
@@ -34,7 +34,11 @@ export const useJoinGame = () => {
     socket.on("error joining game", () => {
       setErrorJoining();
       socket.disconnect();
-      window.history.replaceState("", "", window.location.origin);
+      window.history.replaceState(
+        "",
+        "",
+        window.location.origin + window.location.pathname
+      );
     });
     return cleanUp;
   }, [setMode, setPlayerColor, startNewGame, setErrorJoining]);

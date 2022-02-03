@@ -36,7 +36,9 @@ export const useSocket = () => {
       cleanUp();
     });
     socket.on("game id", (gameId) => {
-      setLink(`${window.location.origin}/${gameId}`);
+      setLink(
+        `${window.location.origin + window.location.pathname}#/${gameId}`
+      );
     });
     socket.on("player connected", () => {
       setPartnerConnected(true);

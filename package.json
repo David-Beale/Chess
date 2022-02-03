@@ -1,6 +1,5 @@
 {
   "name": "chess",
-  "homepage": "https://david-beale.github.io/Chess/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

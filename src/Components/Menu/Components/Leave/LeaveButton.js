@@ -12,7 +12,11 @@ export default function LeaveButton() {
   const onClick = () => {
     setMode("ai");
     socket.disconnect();
-    window.history.replaceState("", "", window.location.origin);
+    window.history.replaceState(
+      "",
+      "",
+      window.location.origin + window.location.pathname
+    );
   };
 
   return (
