@@ -82,4 +82,4 @@ export default function useChessSet() {
   return objects;
 }
 
-useGLTF.preload("/chess.glb");
+useGLTF.preload("../../../../Assets/chess.glb");
